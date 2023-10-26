@@ -598,6 +598,10 @@ class ERestEventListenerRegistry
 		 * @return (bool) true to confirm primary key; false to deny
 		 */
 		$onRest(ERestEvent::REQ_PARAM_IS_PK, function($pk) {
+			if ($pk === null) {
+				return false;
+			}
+
 			return $pk === '0' || preg_match('/^-?[1-9][0-9]*$/', $pk) === 1;
 		});
 
